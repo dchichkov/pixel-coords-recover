@@ -78,11 +78,11 @@ for metric in ['abs_correlation', 'braycurtis', 'canberra', 'correlation', 'cosi
     x,y = results.real[:,0], results.real[:,1]  
     pl.scatter(x, y, c = np.arange(X.shape[1])[SW], cmap=pl.jet())
     pl.title("%s n_neighbors %d" % (metric, n_neighbors))
-    pl.savefig("%s.n_neighbors.%d.png" % (metric, n_neighbors))
-    #pl.show()
+    #pl.savefig("%s.n_neighbors.%d.png" % (metric, n_neighbors))
+    pl.show()
     
 
-exit(0)
+exit()
 print "Saving restored frames..."
 
 name = "movie"    
