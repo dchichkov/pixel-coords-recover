@@ -11,7 +11,8 @@ from sklearn.utils.graph import graph_shortest_path
 
 def kneighbors(X, n_neighbors, metric):
      """Finds the K-neighbors of a point.
-     Returns distance
+     Based on sklearn
+     Returns distance ind
     """
      if metric == 'abs_correlation': 
          dist = pairwise_distances(X, metric = 'correlation')
@@ -24,9 +25,10 @@ def kneighbors(X, n_neighbors, metric):
      neigh_ind = neigh_ind[:, :n_neighbors]
      return neigh_ind
 
-    
+#     
 def kneighbors_graph(X, n_neighbors, metric):
-     """Computes the (weighted) graph of k-Neighbors for points in X
+     """Computes the (weighted) graph of k-Neighbors for points in X.
+     Based on sklearn
      """
      X = np.asarray(X)
 
@@ -41,7 +43,16 @@ def kneighbors_graph(X, n_neighbors, metric):
      return csr_matrix((A_data.ravel(), A_ind.ravel(), A_indptr), shape=(n_samples1, n_samples2))
 
 
+
+
+
 def isomap(X, n_neighbors, metric):
+    """
+        Based on sklearn,
+        Author: Jake Vanderplas  -- <vanderplas@astro.washington.edu>
+        License: BSD, (C) 2011
+    """    
+    
     kng = kneighbors_graph(D, n_neighbors = n_neighbors, metric = metric)    
     dist_matrix_ = graph_shortest_path(kng, method='auto', directed=False)    
     kernel_pca_ = KernelPCA(n_components=2, kernel="precomputed", eigen_solver='auto')
